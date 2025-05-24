@@ -1,0 +1,60 @@
+﻿services:
+# ─────────────────────────  Public entry  ─────────────────────────
+  api-gateway:
+    build: ./api-gateway
+    ports: ["8000:8000"]
+    depends_on:
+      - file-store
+      - file-analysis
+
+# ─────────────────────────  File-Storing  ─────────────────────────
+  file-store:
+    build: ./file-store
+    expose: ["8000"]
+    environment:
+      FILE_DB_DSN: postgresql+psycopg2://scanner:scanner@db_store:5432/store
+      FILE_STORAGE_ROOT: /app/storage
+    volumes:
+      - ./storage/store:/app/storage
+    depends_on: [db_store]
+
+# ─────────────────────────  File-Analysis  ────────────────────────
+  file-analysis:
+    build: ./file-analysis
+    expose: ["8000"]
+    environment:
+      FILE_STORE_URL: http://file-store:8000        # для fetch-gate
+      DB_DSN: postgresql+psycopg2://scanner:scanner@db_analysis:5432/analysis
+      FILE_STORAGE_ROOT: /app/storage
+    volumes:
+      - ./storage/analysis:/app/storage
+    depends_on:
+      - file-store
+      - db_analysis
+
+# ─────────────────────────  Postgres (store)  ─────────────────────
+  db_store:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: store
+      POSTGRES_USER: scanner
+      POSTGRES_PASSWORD: scanner
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata_store:/var/lib/postgresql/data
+
+# ─────────────────────────  Postgres (analysis)  ──────────────────
+  db_analysis:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: analysis
+      POSTGRES_USER: scanner
+      POSTGRES_PASSWORD: scanner
+    ports: ["5433:5432"]
+    volumes:
+      - pgdata_analysis:/var/lib/postgresql/data
+
+# ─────────────────────────  Named volumes  ────────────────────────
+volumes:
+  pgdata_store:
+  pgdata_analysis:

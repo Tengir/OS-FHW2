@@ -1,6 +1,6 @@
 """Bootstrap FastAPI-приложения file-store."""
 from fastapi import FastAPI
-from presentation.routes import router as file_router
+from file_store.presentation.routes import router as file_router
 
 app = FastAPI(
     title="File Store Service",

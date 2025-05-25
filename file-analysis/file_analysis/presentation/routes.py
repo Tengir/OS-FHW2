@@ -3,11 +3,11 @@ from pathlib import Path
 
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 
-from ..application.dto import AnalyseCmd, CloudQuery
-from ..application.use_cases.analyse import AnalyseFileInteractor
-from ..application.use_cases.get_stats import GetStatsInteractor
-from ..application.use_cases.get_cloud import GetCloudInteractor
-from .dependencies import get_analyse_uc, get_stats_uc, get_cloud_uc
+from file_analysis.application.dto import AnalyseCmd, CloudQuery
+from file_analysis.application.use_cases.analyse import AnalyseFileInteractor
+from file_analysis.application.use_cases.get_stats import GetStatsInteractor
+from file_analysis.application.use_cases.get_cloud import GetCloudInteractor
+from file_analysis.presentation.dependencies import get_analyse_uc, get_stats_uc, get_cloud_uc
 
 router = APIRouter(tags=["analysis"])
 

@@ -8,9 +8,9 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 from sqlalchemy import create_engine
 
-from ...domain.entities.stored_file import StoredFile
-from ...domain.interfaces import FileRepository
-from .models import Base, FileRow
+from file_store.domain.entities.stored_file import StoredFile
+from file_store.domain.interfaces import FileRepository
+from file_store.infrastructure.db.models import Base, FileRow
 
 
 class PostgresFileRepository(FileRepository):

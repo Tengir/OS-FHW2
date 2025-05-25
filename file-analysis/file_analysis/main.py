@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from presentation.routes import router as analysis_router
+from file_analysis.presentation.routes import router as analysis_router
 
 app = FastAPI(
     title="File Analysis Service",

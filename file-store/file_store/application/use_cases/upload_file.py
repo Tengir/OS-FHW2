@@ -3,9 +3,9 @@ import hashlib
 from uuid import uuid4
 from pathlib import Path
 
-from ...domain.entities.stored_file import StoredFile
-from ...domain.interfaces import FileRepository, StoragePort
-from ..dto import UploadFileCmd, UploadFileResult
+from file_store.domain.entities.stored_file import StoredFile
+from file_store.domain.interfaces import FileRepository, StoragePort
+from file_store.application.dto import UploadFileCmd, UploadFileResult
 
 
 class UploadFileInteractor:

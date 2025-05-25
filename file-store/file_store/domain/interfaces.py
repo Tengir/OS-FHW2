@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Protocol, runtime_checkable
 from uuid import UUID
 
-from .entities.stored_file import StoredFile
+from file_store.domain.entities.stored_file import StoredFile
 
 
 @runtime_checkable

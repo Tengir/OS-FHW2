@@ -3,10 +3,10 @@ from uuid import UUID
 
 from fastapi import APIRouter, UploadFile, File, Depends, status, Response
 
-from ..application.dto import UploadFileCmd, UploadFileResult
-from ..application.use_cases.upload_file import UploadFileInteractor
-from ..application.use_cases.get_file import GetFileInteractor, GetFileQuery
-from dependencies import get_upload_interactor, get_file_interactor
+from file_store.application.dto import UploadFileCmd, UploadFileResult
+from file_store.application.use_cases.upload_file import UploadFileInteractor
+from file_store.application.use_cases.get_file import GetFileInteractor, GetFileQuery
+from file_store.presentation.dependencies import get_upload_interactor, get_file_interactor
 
 router = APIRouter(tags=["file-store"])
 

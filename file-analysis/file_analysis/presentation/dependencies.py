@@ -3,14 +3,14 @@ from pathlib import Path
 
 import httpx
 
-from ..application.use_cases.analyse import AnalyseFileInteractor
-from ..application.use_cases.get_stats import GetStatsInteractor
-from ..application.use_cases.get_cloud import GetCloudInteractor
-from ..domain.interfaces import StatsRepository, StoragePort, CloudGeneratorPort, FileFetchPort
-from ..infrastructure.db.postgres_stats_repo import PostgresStatsRepository
-from ..infrastructure.storage.disk_storage_adapter import DiskStorageAdapter
-from ..infrastructure.cloud.quickchart_adapter import QuickChartAdapter
-from ..infrastructure.filestore_gateway import FileStoreGatewayAdapter
+from file_analysis.application.use_cases.analyse import AnalyseFileInteractor
+from file_analysis.application.use_cases.get_stats import GetStatsInteractor
+from file_analysis.application.use_cases.get_cloud import GetCloudInteractor
+from file_analysis.domain.interfaces import StatsRepository, StoragePort, CloudGeneratorPort, FileFetchPort
+from file_analysis.infrastructure.db.postgres_stats_repo import PostgresStatsRepository
+from file_analysis.infrastructure.storage.disk_storage_adapter import DiskStorageAdapter
+from file_analysis.infrastructure.cloud.quickchart_adapter import QuickChartAdapter
+from file_analysis.infrastructure.filestore_gateway import FileStoreGatewayAdapter
 from .config import get_settings
 
 

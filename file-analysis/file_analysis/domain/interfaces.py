@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Protocol
 from uuid import UUID
 
-from .entities.file_stats import FileStats
+from file_analysis.domain.entities.file_stats import FileStats
 
 
 class StatsRepository(Protocol):

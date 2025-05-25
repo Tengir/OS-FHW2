@@ -2,7 +2,7 @@
 
 import httpx
 
-from ..domain.interfaces import FileFetchPort
+from file_analysis.domain.interfaces import FileFetchPort
 
 
 class FileStoreGatewayAdapter(FileFetchPort):

@@ -2,14 +2,9 @@
 from pathlib import Path
 from uuid import UUID
 
-from ...domain.interfaces import (
-    StatsRepository,
-    StoragePort,
-    CloudGeneratorPort,
-    FileFetchPort,
-)
-from ...domain.entities import FileStats
-from ..dto import AnalyseCmd, AnalyseResultDTO
+from file_analysis.domain.interfaces import StatsRepository, StoragePort, CloudGeneratorPort, FileFetchPort
+from file_analysis.domain.entities.file_stats import FileStats
+from file_analysis.application.dto import AnalyseCmd, AnalyseResultDTO
 
 
 class AnalyseFileInteractor:

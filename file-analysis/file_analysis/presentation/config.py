@@ -1,8 +1,8 @@
 ﻿from functools import lru_cache
 from pathlib import Path
-from typing import AnyUrl
 
-from pydantic import BaseSettings, Field
+from pydantic import AnyUrl, Field
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):

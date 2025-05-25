@@ -1,8 +1,8 @@
 ﻿"""Use-case «Получить файл по ID»."""
 from uuid import UUID
 
-from ...domain.interfaces import FileRepository, StoragePort
-from ..dto import GetFileQuery, FileReadDTO
+from file_store.domain.interfaces import FileRepository, StoragePort
+from file_store.application.dto import GetFileQuery, FileReadDTO
 
 
 class GetFileInteractor:

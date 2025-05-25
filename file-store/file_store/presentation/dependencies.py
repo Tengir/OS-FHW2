@@ -3,10 +3,10 @@ from functools import lru_cache
 from pathlib import Path
 from os import getenv
 
-from ..application.use_cases.upload_file import UploadFileInteractor
-from ..application.use_cases.get_file import GetFileInteractor
-from ..infrastructure.db.postgres_file_repo import PostgresFileRepository
-from ..infrastructure.storage.disk_adapter import DiskStorageAdapter
+from file_store.application.use_cases.upload_file import UploadFileInteractor
+from file_store.application.use_cases.get_file import GetFileInteractor
+from file_store.infrastructure.db.postgres_file_repo import PostgresFileRepository
+from file_store.infrastructure.storage.disk_adapter import DiskStorageAdapter
 
 
 @lru_cache

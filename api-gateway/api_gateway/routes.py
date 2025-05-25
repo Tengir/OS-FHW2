@@ -4,8 +4,8 @@ from uuid import UUID
 import httpx
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, status, Response
 
-from config import get_settings
-from .dependencies import get_http_client
+from api_gateway.config import get_settings
+from api_gateway.dependencies import get_http_client
 
 router = APIRouter(tags=["gateway"], prefix="")
 

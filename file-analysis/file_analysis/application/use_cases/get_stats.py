@@ -1,7 +1,7 @@
 ﻿from uuid import UUID
 
-from ...domain.interfaces import StatsRepository
-from ..dto import StatsDTO
+from file_analysis.domain.interfaces import StatsRepository
+from file_analysis.application.dto import StatsDTO
 
 
 class GetStatsInteractor:

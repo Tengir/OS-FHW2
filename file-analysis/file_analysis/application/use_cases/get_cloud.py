@@ -1,7 +1,7 @@
 ﻿from pathlib import Path
 
-from ...domain.interfaces import StoragePort
-from ..dto import CloudQuery
+from file_analysis.domain.interfaces import StoragePort
+from file_analysis.application.dto import CloudQuery
 
 
 class GetCloudInteractor:

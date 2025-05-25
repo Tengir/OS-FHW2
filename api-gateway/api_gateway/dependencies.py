@@ -2,7 +2,7 @@
 from functools import lru_cache
 
 import httpx
-from config import get_settings
+from api_gateway.config import get_settings
 
 
 @lru_cache

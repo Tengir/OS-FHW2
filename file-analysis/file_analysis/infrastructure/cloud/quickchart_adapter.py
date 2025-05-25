@@ -2,7 +2,7 @@
 from pathlib import Path
 from typing import Any
 
-from ...domain.interfaces import CloudGeneratorPort
+from file_analysis.domain.interfaces import CloudGeneratorPort
 
 
 class QuickChartAdapter(CloudGeneratorPort):

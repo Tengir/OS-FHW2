@@ -5,9 +5,9 @@ from typing import Callable
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
-from ...domain.entities import FileStats
-from ...domain.interfaces import StatsRepository
-from .models import Base, StatsRow
+from file_analysis.domain.entities.file_stats import FileStats
+from file_analysis.domain.interfaces import StatsRepository
+from file_analysis.infrastructure.db.models import Base, StatsRow
 
 
 class PostgresStatsRepository(StatsRepository):

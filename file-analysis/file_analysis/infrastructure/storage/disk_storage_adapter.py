@@ -1,6 +1,6 @@
 ﻿from pathlib import Path
 
-from ...domain.interfaces import StoragePort
+from file_analysis.domain.interfaces import StoragePort
 
 
 class DiskStorageAdapter(StoragePort):

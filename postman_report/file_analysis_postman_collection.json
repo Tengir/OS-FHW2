@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "File Analysis Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Upload valid .txt file",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "example.txt"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/upload",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "upload"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get file by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/files/11111111-1111-1111-1111-111111111111",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "files",
+            "11111111-1111-1111-1111-111111111111"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Analyze file",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/analyze/11111111-1111-1111-1111-111111111111",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analyze",
+            "11111111-1111-1111-1111-111111111111"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get cloud image",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/cloud/cloud_11111111-1111-1111-1111-111111111111.png",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cloud",
+            "cloud_11111111-1111-1111-1111-111111111111.png"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Upload with no file (400)",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{base_url}}/upload",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "upload"
+          ]
+        },
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        }
+      }
+    },
+    {
+      "name": "Get file with nonexistent ID (404)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/files/00000000-0000-0000-0000-000000000000",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "files",
+            "00000000-0000-0000-0000-000000000000"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get nonexistent cloud image (404)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/cloud/nonexistent.png",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "cloud",
+            "nonexistent.png"
+          ]
+        }
+      }
+    }
+  ]
+}

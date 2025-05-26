@@ -1,5 +1,6 @@
 ﻿"""Все публичные REST-энд-пойнты Gateway."""
 from uuid import UUID
+from urllib.parse import urljoin
 
 import httpx
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, status, Response
@@ -10,7 +11,6 @@ from api_gateway.dependencies import get_http_client
 router = APIRouter(tags=["gateway"], prefix="")
 
 # ---------- helpers ---------------------------------------------------------
-
 
 def _proxy_error(exc: Exception) -> HTTPException:
     """Преобразовать внутренние ошибки в читабельный HTTP-ответ."""
@@ -23,7 +23,6 @@ def _proxy_error(exc: Exception) -> HTTPException:
 
 # ---------- endpoints -------------------------------------------------------
 
-
 @router.post("/upload", status_code=status.HTTP_201_CREATED)
 async def upload_file(
     file: UploadFile = File(...),
@@ -32,7 +31,8 @@ async def upload_file(
     """Принимает текстовый .txt файл и проксирует его в File-Store."""
     try:
         files = {"file": (file.filename, await file.read(), file.content_type)}
-        resp = await client.post(f"{get_settings().FILE_STORE_URL}/upload", files=files)
+        url = urljoin(str(get_settings().FILE_STORE_URL), "upload")
+        resp = await client.post(url, files=files)
     except Exception as exc:
         raise _proxy_error(exc)
 
@@ -46,7 +46,8 @@ async def download_file(
 ):
     """Отдаёт .txt по ID из File-Store."""
     try:
-        resp = await client.get(f"{get_settings().FILE_STORE_URL}/files/{file_id}")
+        url = urljoin(str(get_settings().FILE_STORE_URL), f"files/{file_id}")
+        resp = await client.get(url)
     except Exception as exc:
         raise _proxy_error(exc)
 
@@ -60,7 +61,8 @@ async def analyze_file(
 ):
     """Запрос статистики из File-Analysis."""
     try:
-        resp = await client.get(f"{get_settings().ANALYSIS_URL}/analyze/{file_id}")
+        url = urljoin(str(get_settings().ANALYSIS_URL), f"analyze/{file_id}")
+        resp = await client.get(url)
     except Exception as exc:
         raise _proxy_error(exc)
 
@@ -74,7 +76,7 @@ async def get_cloud(
 ):
     """Отдаёт png-облако слов из File-Analysis."""
     try:
-        url = f"{get_settings().ANALYSIS_URL}/cloud/{path}"
+        url = urljoin(str(get_settings().ANALYSIS_URL), f"cloud/{path}")
         resp = await client.get(url)
     except Exception as exc:
         raise _proxy_error(exc)

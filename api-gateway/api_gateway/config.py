@@ -2,6 +2,7 @@
 from functools import lru_cache
 from pydantic import AnyUrl, Field
 from pydantic_settings import BaseSettings
+import os
 
 
 class Settings(BaseSettings):

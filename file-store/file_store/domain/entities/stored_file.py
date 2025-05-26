@@ -3,6 +3,8 @@ from uuid import UUID, uuid4
 
 
 class StoredFile:
+    """Доменная сохраняемого файла."""
+
     _id: UUID
     _name: str
     _hash: str

@@ -1,4 +1,11 @@
-﻿from pathlib import Path
+﻿"""
+Инфраструктурный репозиторий статистики на PostgreSQL.
+
+• Хранит/читает сущность `FileStats` в таблице `stats` (модель `StatsRow`).
+• Использует SQLAlchemy ORM (sync-режим, future =True).
+"""
+
+from pathlib import Path
 from uuid import UUID
 from typing import Callable
 
@@ -11,14 +18,28 @@ from file_analysis.infrastructure.db.models import Base, StatsRow
 
 
 class PostgresStatsRepository(StatsRepository):
+    """Реализация `StatsRepository`, работающая поверх PostgreSQL + SQLAlchemy."""
+
     def __init__(self, dsn: str) -> None:
+        """
+        Parameters
+        ----------
+        dsn : str
+            Строка подключения вида
+            ``postgresql+psycopg2://user:password@host:port/dbname``.
+        """
         eng = create_engine(dsn, future=True)
-        Base.metadata.create_all(eng)
+        Base.metadata.create_all(eng)  # «ленивая» миграция – лишь для учебного примера
         self._sf: Callable[[], Session] = scoped_session(
             sessionmaker(eng, autoflush=False, expire_on_commit=False)
         )
 
+    # --------------------------------------------------------------------- #
+    # StatsRepository interface
+    # --------------------------------------------------------------------- #
+
     def add(self, stats: FileStats) -> None:
+        """Сохраняет статистику одним INSERT-ом в транзакции."""
         with self._sf() as ss, ss.begin():
             ss.add(
                 StatsRow(
@@ -32,6 +53,7 @@ class PostgresStatsRepository(StatsRepository):
             )
 
     def get(self, file_id: UUID) -> FileStats | None:
+        """Возвращает `FileStats` или `None`, если запись не найдена."""
         stmt = select(StatsRow).where(StatsRow.source_file_id == file_id)
         with self._sf() as ss:
             row: StatsRow | None = ss.scalar(stmt)
